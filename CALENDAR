@@ -1,0 +1,167 @@
+from tkinter import *
+import calendar
+from datetime import datetime
+from tkinter import messagebox
+from tkinter import filedialog
+
+
+def Calendarr():
+    window=Tk()
+    window.config(bg="light pink")
+    window.title("Complete year calendar")
+    window.geometry("570x620")
+    get_year=int(year_entry.get())
+    window_content=calendar.calendar(get_year)
+    year_cal=Label(window,text=window_content,font=("Bookman Old Style",12,"bold"))
+    year_cal.grid(row=5,column=1)
+
+    def save_calendar():
+        file=filedialog.asksaveasfilename(
+            defaultextension=".txt",
+            filetypes=[("Text Files","*.txt")]
+        )
+
+        if file:
+            with open(file,"w") as f:
+                f.write(window_content)
+
+            messagebox.showinfo("Saved","Calendar saved successfully!")
+
+    save_button=Button(
+        window,
+        text="Save Calendar",
+        bg="light yellow",
+        font=("Bookman Old Style",12,"bold"),
+        command=save_calendar
+    )
+    save_button.grid(row=6,column=1,pady=10)
+
+    window.mainloop()
+
+def find_day():
+    try:
+        day=int(day_entry.get())
+        month=int(month_entry.get())
+        year=int(day_year_entry.get())
+
+        date=datetime(year,month,day)
+
+        result_label.config(
+            text="Day: " + date.strftime("%A")
+        )
+
+    except:
+        messagebox.showerror(
+            "Error",
+            "Please enter a valid date!"
+        )
+
+def update_time():
+    current_time=datetime.now().strftime(
+        "%d-%m-%Y   %I:%M:%S %p"
+    )
+
+    time_label.config(
+        text="Today: " + current_time
+    )
+
+    root.after(1000,update_time)
+
+
+    
+if __name__ == '__main__':
+    root=Tk()
+    root.config(background="light blue")
+    root.title("GUI Calendar")
+    root.geometry("400x500")
+
+    name=Label(root,text="Calendar",bg="light yellow",
+               font=("Bookman Old Style",20,"bold"))
+    name.grid(row=1,column=1)
+
+    year=Label(root,text="enter the year",bg="light yellow",
+               font=("Bookman Old Style",15))
+    year.grid(row=2,column=1)
+
+    year_entry=Entry(root,font=('Bookman Old Style',15,"bold"))
+    year_entry.grid(row=3,column=1)
+
+    show_button=Button(
+        root,
+        text="Show Calender!",
+        fg="black",
+        bg="light yellow",
+        font=("Bookman Old Style",15),
+        command=Calendarr
+    )
+    show_button.grid(row=4,column=1)
+
+    find_title=Label(
+        root,
+        text="Find Day",
+        bg="light yellow",
+        font=("Bookman Old Style",15,"bold")
+    )
+    find_title.grid(row=6,column=1,pady=10)
+
+    day_entry=Entry(
+        root,
+        font=("Bookman Old Style",12),
+        width=10
+    )
+    day_entry.grid(row=7,column=1)
+
+    day_entry.insert(0,"Day")
+
+
+    month_entry=Entry(
+        root,
+        font=("Bookman Old Style",12),
+        width=10
+    )
+    month_entry.grid(row=8,column=1)
+
+    month_entry.insert(0,"Month")
+
+
+    day_year_entry=Entry(
+        root,
+        font=("Bookman Old Style",12),
+        width=10
+    )
+    day_year_entry.grid(row=9,column=1)
+
+    day_year_entry.insert(0,"Year")
+
+
+    find_button=Button(
+        root,
+        text="Find Day",
+        bg="light yellow",
+        font=("Bookman Old Style",12),
+        command=find_day
+    )
+    find_button.grid(row=10,column=1,pady=5)
+
+
+    result_label=Label(
+        root,
+        text="",
+        bg="light blue",
+        font=("Bookman Old Style",13,"bold")
+    )
+    result_label.grid(row=11,column=1)
+
+
+    time_label=Label(
+        root,
+        text="",
+        bg="light blue",
+        font=("Bookman Old Style",12,"bold")
+    )
+    time_label.grid(row=12,column=1,pady=15)
+
+    update_time()
+
+
+    root.mainloop()
