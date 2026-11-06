@@ -20,11 +20,7 @@ SmartCal is a simple and user-friendly calendar application developed using Pyth
 - Tkinter
 
   ## output
-  <img width="301" height="399" alt="image" src="https://github.com/user-attachments/assets/758b3e75-930a-4f09-bd75-cdb7819cbc6e" />
-
-<img width="428" height="489" alt="image" src="https://github.com/user-attachments/assets/52385d47-9626-4158-886a-92e182258b5a" />
-
-<img width="301" height="399" alt="image" src="https://github.com/user-attachments/assets/dbe5baaf-19a7-4f90-9f2f-f9e087e871c7" />
+  
 
 
   
